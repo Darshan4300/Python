@@ -1,0 +1,38 @@
+import pandas as pd
+
+# Create a DataFrame with Gujarati words and their corresponding English translations
+data = {
+    'Gujarati': ['હેલો', 'ધન્યવાદ', 'શુક્રવાર', 'પ્રેમ', 'સમજ'],
+    'English': ['Hello', 'Thank you', 'Friday', 'Love', 'Understanding']
+}
+
+df = pd.DataFrame(data)
+
+# Function to start the translation challenge
+def translation_challenge():
+    score = 0
+    total_questions = len(df)
+    
+    # Shuffle the DataFrame to give random words each time
+    df_shuffled = df.sample(frac=1).reset_index(drop=True)
+    
+    # Loop through the words in the DataFrame
+    for index, row in df_shuffled.iterrows():
+        gujarati_word = row['Gujarati']
+        correct_translation = row['English']
+        
+        # Ask the user to translate the Gujarati word
+        user_translation = input(f"Translate '{gujarati_word}' into English: ").strip()
+        
+        # Check if the translation is correct
+        if user_translation.lower() == correct_translation.lower():
+            print("Correct!")
+            score += 1
+        else:
+            print(f"Incorrect! The correct translation is '{correct_translation}'.")
+
+    # Display the final score
+    print(f"\nChallenge over! Your score is {score}/{total_questions}.")
+
+# Start the translation challenge
+translation_challenge()
